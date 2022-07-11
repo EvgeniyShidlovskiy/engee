@@ -39,4 +39,4 @@ function step(var_xcorr::Correlation,u,x)
 		return permutedims(hcat(y))
 end
 var_xcorr=Correlation("Correlation")
-step([7 8 -9 0],[1 2 3 4 5])
+step(var_xcorr,[7 8 -9 0],[1 2 3 4])
