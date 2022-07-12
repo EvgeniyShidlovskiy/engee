@@ -27,11 +27,13 @@ mutable struct Histogram
       if find_hist_over != "Entire input" && find_hist_over != "Each column"
         error("Поиск гистограммы должен быть по методу Entire input или Each column")
       end
-         new(find_hist_over,bins,low_lim,up_lim,normalized,running,reset_port,zeros(bins),zeros(bins,3))
+         new(find_hist_over,bins,low_lim,up_lim,normalized,running,reset_port,zeros(bins),[0.0])
   end  
 end
 
-
+function setup(var_hist::Histogram,u)
+  var_hist.ye = zeros(var_hist.bins,size(u,2))
+end
 function step(var_hist::Histogram,u)
   if var_hist.find_hist_over == "Entire input" && var_hist.normalized == false
 y = zeros(var_hist.bins)
@@ -267,6 +269,7 @@ return var_hist.ye
 end
 
 var_hist=Histogram("Each column",7,1,10,false,true,"None-zero sample")
+setup(var_hist,[1 2 -2; 4 83 6; 4 100 6;4 83 6;4 -80 6;4 83 0;4 83 6;2 83 6;1 83 6])
 step(var_hist,[1 2 -2; 4 83 6; 4 100 6;4 83 6;4 -80 6;4 83 0;4 83 6;2 83 6;1 83 6],0)
 step(var_hist,[1 2 -2; 4 83 6; 4 100 6;4 83 6;4 -80 6;4 83 0;4 83 6;2 83 6;1 83 6],0)
 
