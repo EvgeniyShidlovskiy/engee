@@ -1,0 +1,11 @@
+x=[1 2]
+dot product = sum(each elemet * each
+maximum = maximum(x)
+matrix sum =sum(x)
+linier term3 = dot product * maximum
+linier term2 = dot product * maximum - sum1
+sum1 = matrix sum *  matrix sum
+
+
+1*1-5 2*2-5 3*3-5 4*4-5 5*5 -5
+-4 -1 4 11 20
