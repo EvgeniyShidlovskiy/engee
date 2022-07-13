@@ -11,6 +11,7 @@ mutable struct Histogram
   ye::Array{Float64}
   Histogram_BinCount::Array{Float64}
   Histogram_Iteration::Float64
+  prv_rst::Int64
   
 
   function Histogram(find_hist_over::String,bins::Int64,low_lim::Int64,up_lim::Int64)
@@ -30,7 +31,7 @@ mutable struct Histogram
       if find_hist_over != "Entire input" && find_hist_over != "Each column"
         error("Поиск гистограммы должен быть по методу Entire input или Each column")
       end
-         new(find_hist_over,bins,low_lim,up_lim,normalized,running,reset_port,zeros(bins),[0.0],zeros(bins),0.0)
+         new(find_hist_over,bins,low_lim,up_lim,normalized,running,reset_port,zeros(bins),[0.0],zeros(bins),0.0,0)
   end  
 end
 
@@ -362,9 +363,19 @@ elseif var_hist.find_hist_over == "Each column" && var_hist.normalized == true &
     var_hist.ye[i+1] = var_hist.Histogram_BinCount[i+1] * scale;
   end
   return var_hist.ye
-elseif var_hist.find_hist_over == "Entire input" && var_hist.normalized == false && var_hist.running == true && var_hist.reset_port == "Rising edge"
-  rst == 0
-  if rst == 0 
+elseif var_hist.find_hist_over == "Entire input" && var_hist.normalized == false && var_hist.running == true 
+  
+  if (var_hist.reset_port == "Either edge" &&
+    (var_hist.prv_rst == 0 && rst !=0) || (var_hist.prv_rst != 0 && rst == 0)) ||
+  
+    (var_hist.reset_port == "Falling edge"  &&
+    var_hist.prv_rst != 0 && rst == 0) ||
+  
+    (var_hist.reset_port == "Rising edge" &&
+    var_hist.prv_rst == 0 && rst != 0)
+    
+  
+
     for i = 0:var_hist.bins-1
       var_hist.y[i+1] = 0.0;
     end
@@ -407,15 +418,20 @@ elseif var_hist.find_hist_over == "Entire input" && var_hist.normalized == false
        i=i+1;
    end
   end
+  var_hist.prv_rst = rst
 return var_hist.y   
   end
 
 end
 
 
-var_hist=Histogram("Entire input",7,1,10,false,true,"Rising edge")
+var_hist=Histogram("Entire input",7,1,10,false,true,"Falling edge")
 setup(var_hist,[1 2 -2; 4 83 6; 4 100 6;4 83 6;4 -80 6;4 83 0;4 83 6;2 83 6;1 83 6])
+step(var_hist,[1 2 -2; 4 83 6; 4 100 6;4 83 6;4 -80 6;4 83 0;4 83 6;2 83 6;1 83 6],0)
 step(var_hist,[1 2 -2; 4 83 6; 4 100 6;4 83 6;4 -80 6;4 83 0;4 83 6;2 83 6;1 83 6],1)
+step(var_hist,[1 2 -2; 4 83 6; 4 100 6;4 83 6;4 -80 6;4 83 0;4 83 6;2 83 6;1 83 6],0)
+
+
 
 
 
