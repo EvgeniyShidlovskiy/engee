@@ -365,16 +365,9 @@ elseif var_hist.find_hist_over == "Each column" && var_hist.normalized == true &
   return var_hist.ye
 elseif var_hist.find_hist_over == "Entire input" && var_hist.normalized == false && var_hist.running == true 
   
-  if (var_hist.reset_port == "Either edge" &&
-    (var_hist.prv_rst == 0 && rst !=0) || (var_hist.prv_rst != 0 && rst == 0)) ||
-  
-    (var_hist.reset_port == "Falling edge"  &&
-    var_hist.prv_rst != 0 && rst == 0) ||
-  
-    (var_hist.reset_port == "Rising edge" &&
-    var_hist.prv_rst == 0 && rst != 0)
-    
-  
+  if (var_hist.reset_port == "Either edge" && ((var_hist.prv_rst == 0 && rst !=0) ||  (var_hist.prv_rst != 0 && rst == 0))) ||
+     (var_hist.reset_port == "Rising edge" && var_hist.prv_rst == 0 && rst != 0) ||
+      (var_hist.reset_port == "Falling edge"  &&var_hist.prv_rst != 0 && rst == 0) 
 
     for i = 0:var_hist.bins-1
       var_hist.y[i+1] = 0.0;
