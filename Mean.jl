@@ -17,7 +17,7 @@ function step(var_mean::Mean,x::Array{Float64},i = 1::Int64)
     elseif var_mean.mode == "Each column"
         return y = mean.(eachcol(x))
         else var_mean.mode == "Specified dimension"
-        return y = permutedims(hcat(mean(x,dims = i))) # return Matrix like Simulink
+        return y = permutedims(hcat(mean(x,dims = i)))
     end
 end
 var_mean = Mean("Specified dimension")

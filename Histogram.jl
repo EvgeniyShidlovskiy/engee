@@ -31,6 +31,9 @@ mutable struct Histogram
       if find_hist_over != "Entire input" && find_hist_over != "Each column"
         error("Поиск гистограммы должен быть по методу Entire input или Each column")
       end
+      if reset_port != "None-zero sample" && reset_port != "Either edge" && reset_port != "Falling edge" && reset_port != "Rising edge"
+        error("Reset port должен bvtnm pyfxtybt None-zero sample или Either edge или Falling edge или Rising edge")
+      end
          new(find_hist_over,bins,low_lim,up_lim,normalized,running,reset_port,zeros(bins),[0.0],zeros(bins),0.0,0)
   end  
 end
@@ -605,9 +608,10 @@ end
 end
 
 
-var_hist=Histogram("Entire input",7,1,10,true,true,"None-zero sample")
+var_hist=Histogram("Entire input",7,1,10,false,true,"Rising edge")
 setup(var_hist,[1 2 -2; 4 83 6; 4 100 6;4 83 6;4 -80 6;4 83 0;4 83 6;2 83 6;1 83 6])
 step(var_hist,[1 2 -2; 4 83 6; 4 100 6;4 83 6;4 -80 6;4 83 0;4 83 6;2 83 6;1 83 6],0)
 step(var_hist,[1 2 -2; 4 83 6; 4 100 6;4 83 6;4 -80 6;4 83 0;4 83 6;2 83 6;1 83 6],1)
 step(var_hist,[1 2 -2; 4 83 6; 4 100 6;4 83 6;4 -80 6;4 83 0;4 83 6;2 83 6;1 83 6],1)
 step(var_hist,[1 2 -2; 4 83 6; 4 100 6;4 83 6;4 -80 6;4 83 0;4 83 6;2 83 6;1 83 6],0)
+step(var_hist,[1 2 -2; 4 83 6; 4 100 6;4 83 6;4 -80 6;4 83 0;4 83 6;2 83 6;1 83 6],1)

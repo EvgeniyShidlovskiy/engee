@@ -1,4 +1,4 @@
-#need add Running mode
+
 mutable struct Minimum
     mode::String
     min_over::String
