@@ -76,8 +76,42 @@ function step(var_pow::Power_meter,x)
 end 
 
 end
-var_pow=Power_meter("All",256,3,"Watts")
-step(var_pow,1)
-step(var_pow,2)
-step(var_pow,3)
-step(var_pow,4)
+var_pow=Power_meter("Peak-to_average Ratio",4,1,"Watts")
+ouput_jl = [step(var_pow,1) step(var_pow,2) step(var_pow,3) step(var_pow,4)]
+mat"input1=[1 2 3 4]"
+mat"sim('C:\\Users\\523ur\\OneDrive\\Desktop\\engee-main\\New folder\\Power_meter_Peak_to_average_Ratio_Watts')"
+ouput_mat=mat"output1'"
+test = ouput_jl - ouput_mat
+eps_val = fill(3*eps(),size(test))
+if vec(test)<vec(eps_val)
+    println("Тест Power_meter_Peak_to_average_Ratio_Watts пройден")
+else vec(test)>vec(eps_val)
+    error("Тест Power_meter_Peak_to_average_Ratio_Watts не пройден")
+end
+
+var_pow=Power_meter("Peak-to_average Ratio",4,1,"dBW")
+ouput_jl = [step(var_pow,1) step(var_pow,2) step(var_pow,3) step(var_pow,4)]
+mat"input1=[1 2 3 4]"
+mat"sim('C:\\Users\\523ur\\OneDrive\\Desktop\\engee-main\\New folder\\Power_meter_Peak_to_average_Ratio_dBW')"
+ouput_mat=mat"output1'"
+test = ouput_jl - ouput_mat
+eps_val = fill(3*eps(),size(test))
+if vec(test)<vec(eps_val)
+    println("Тест Power_meter_Peak_to_average_Ratio_dBW пройден")
+else vec(test)>vec(eps_val)
+    error("Тест Power_meter_Peak_to_average_Ratio_dBW не пройден")
+end
+
+
+var_pow=Power_meter("Peak-to_average Ratio",4,1,"dBm")
+ouput_jl = [step(var_pow,1) step(var_pow,2) step(var_pow,3) step(var_pow,4)]
+mat"input1=[1 2 3 4]"
+mat"sim('C:\\Users\\523ur\\OneDrive\\Desktop\\engee-main\\New folder\\Power_meter_Peak_to_average_Ratio_dBm')"
+ouput_mat=mat"output1'"
+test = ouput_jl - ouput_mat
+eps_val = fill(3*eps(),size(test))
+if vec(test)<vec(eps_val)
+    println("Тест Power_meter_Peak_to_average_Ratio_dBm пройден")
+else vec(test)>vec(eps_val)
+    error("Тест Power_meter_Peak_to_average_Ratio_dBm не пройден")
+end

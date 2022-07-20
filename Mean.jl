@@ -20,5 +20,5 @@ function step(var_mean::Mean,x::Array{Float64},i = 1::Int64)
         return y = permutedims(hcat(mean(x,dims = i)))
     end
 end
-var_mean = Mean("Specified dimension")
+var_mean = Mean("Entire input")
 step(var_mean,[2.0 -3.0 58.0;5.0 30.0 -80;50.0 -1.0 3.0],1)
