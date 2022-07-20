@@ -157,10 +157,56 @@ if var_var.method == "Exponential weighthing" && var_var.specify == true
        end     
     end
 end
+
+moving_var=Moving_variance("Sliding window",false)
+ouput_jl = [step(moving_var,[1]) step(moving_var,[2]) step(moving_var,[3]) step(moving_var,[4])]
+mat"input1=[2 3 4 5]"
+mat"sim('C:\\Users\\523ur\\OneDrive\\Desktop\\engee-main\\New folder\\Moving_Variance_without_win_length')"
+ouput_mat=mat"output1'"
+test = ouput_jl-ouput_mat
+eps_val = fill(3*eps(),size(test))
+if vec(test)<vec(eps_val)
+    println("Тест Moving_Variance_without_win_length пройден")
+else vec(test)>vec(eps_val)
+    error("Тест Moving_Variance_without_win_length не пройден")
+end
+
 moving_var=Moving_variance("Sliding window",4)
-step(moving_var,2)
-step(moving_var,3)
-step(moving_var,4)
+ouput_jl = [step(moving_var,2) step(moving_var,3) step(moving_var,4) step(moving_var,5)]
+mat"input1=[2 3 4 5]"
+mat"sim('C:\\Users\\523ur\\OneDrive\\Desktop\\engee-main\\New folder\\Moving_Variance_win_length')"
+ouput_mat=mat"output1'"
+test = ouput_jl-ouput_mat
+eps_val = fill(3*eps(),size(test))
+if vec(test)<vec(eps_val)
+    println("Тест Moving_Variance_win_length пройден")
+else vec(test)>vec(eps_val)
+    error("Тест Moving_Variance_win_length не пройден")
+end
 
+moving_var=Moving_variance("Exponential weighthing",true)
+ouput_jl = [step(moving_var,[2],0.9) step(moving_var,[3],0.9) step(moving_var,[4],0.9) step(moving_var,[5],0.9)]
+mat"input1=[2 3 4 5]"
+mat"forgetting_factor=0.9"
+mat"sim('C:\\Users\\523ur\\OneDrive\\Desktop\\engee-main\\New folder\\Moving_Variance_Exponential_weighthing_forget_factor')"
+ouput_mat=mat"output1'"
+test  = ouput_jl - ouput_mat
+eps_val = fill(3*eps(),size(test))
+if vec(test)<vec(eps_val)
+    println("Тест Moving_Variance_Exponential_weighthing_forget_factor пройден")
+else vec(test)>vec(eps_val)
+    error("Тест Moving_Variance_Exponential_weighthing_forget_factor не пройден")
+end
 
-
+moving_var=Moving_variance("Exponential weighthing",0.9)
+ouput_jl = [step(moving_var,[2]) step(moving_var,[3]) step(moving_var,[4]) step(moving_var,[5])]
+mat"input1=[2 3 4 5]"
+mat"sim('C:\\Users\\523ur\\OneDrive\\Desktop\\engee-main\\New folder\\Moving_Variance_Exponential_weighthing_09')"
+ouput_mat=mat"output1'"
+test  = ouput_jl - ouput_mat
+eps_val = fill(3*eps(),size(test))
+if vec(test)<vec(eps_val)
+    println("Тест Moving_Variance_Exponential_weighthing_09 пройден")
+else vec(test)>vec(eps_val)
+    error("Тест Moving_Variance_Exponential_weighthing_09 не пройден")
+end
