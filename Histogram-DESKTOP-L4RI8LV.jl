@@ -13,7 +13,7 @@ mutable struct Histogram
   Histogram_Iteration::Float64
   prv_rst::Int64
   
-
+#need add running error
   function Histogram(find_hist_over::String,bins::Int64,low_lim::Int64,up_lim::Int64)
   if find_hist_over != "Entire input" && find_hist_over != "Each column"
     error("Поиск гистограммы должен быть по методу Entire input или Each column")
@@ -45,7 +45,7 @@ end
 function step(var_hist::Histogram,u)
   if var_hist.find_hist_over == "Entire input" && var_hist.normalized == false
 y = zeros(var_hist.bins)
-i=1
+
   for k=1:length(u)
    
     if u[i] <= var_hist.low_lim 
@@ -610,5 +610,6 @@ end
 end
 
 
-var_hist=Histogram("Each column",11,0,10)
+var_hist=Histogram("Entire input",7,1,10)
+
 step(var_hist,[1 2 -2])

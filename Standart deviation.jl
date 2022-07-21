@@ -20,57 +20,63 @@ function step(var_stan_dev::Standart_deviation,x,i = 1::Int64)
         return y = permutedims(hcat(std(x,dims = i))) 
     end
 end
-#tests
+
+
+
 
 
 var_stan_dev = Standart_deviation("Each column")
-ouput_std_each_col_jl=step(var_stan_dev,[2.0 -36.0 58.0;5.0 30.0 -86;50.0 -1.0 4.0])
+ouput_jl = step(var_stan_dev,[2.0 -3.0 58.0;5.0 30.0 -80;50.0 -1.0 3.0])
 mat"const1=[2.0 -36.0 58.0;5.0 30.0 -86;50.0 -1.0 4.0]"
-mat"sim('C:\\Users\\523ur\\OneDrive\\Desktop\\engee-main\\New folder\\Standart_deviation_Each_column')"
-ouput_std_each_col_mat=mat"output1'"
-test = ouput_std_each_col_jl - ouput_std_each_col_mat
+mat"sim('C:\\Users\\523ur\\OneDrive\\Desktop\\engee-main\\New folder\\Standart_Deviation_Each_column')"
+ouput_mat=mat"output1'"
+test = ouput_jl - ouput_mat
 eps_val = fill(3*eps(),length(test))
 if test<eps_val
-    println("Тест Standart_deviation_Each_column пройден")
+    println("Тест Standart_Deviation_Each_column пройден")
+    
 else test>eps_val
-    error("Тест Standart_deviation_Each_column не пройден")
+    error("Тест Standart_Deviation_Each_column не пройден")
 end
 
 var_stan_dev = Standart_deviation("Each row")
-ouput_std_each_row_jl=step(var_stan_dev,[2.0 -36.0 58.0;5.0 30.0 -86;50.0 -1.0 4.0])
+ouput_jl=step(var_stan_dev,[2.0 -36.0 58.0;5.0 30.0 -86;50.0 -1.0 4.0])
 mat"const1=[2.0 -36.0 58.0;5.0 30.0 -86;50.0 -1.0 4.0]"
-mat"sim('C:\\Users\\523ur\\OneDrive\\Desktop\\engee-main\\New folder\\Standart_deviation_Each_row')"
-ouput_std_each_row_mat=mat"output1'"
-test = ouput_std_each_row_jl - ouput_std_each_row_mat
+mat"sim('C:\\Users\\523ur\\OneDrive\\Desktop\\engee-main\\New folder\\Standart_Deviation_Each_row')"
+ouput_mat=mat"output1'"
+test = ouput_jl - ouput_mat
 eps_val = fill(3*eps(),size(test))
 if vec(test)<vec(eps_val)
     println("Тест Standart_deviation_Each_row пройден")
-else test>eps_val
+    
+else vec(test)>vec(eps_val)
     error("Тест Standart_deviation_Each_row не пройден")
 end
 
-var_var = Standart_deviation("Entire input")
-ouput_std_ent_inp_jl=step(var_var,[2.0 -36.0 58.0;5.0 30.0 -86;50.0 -1.0 4.0])
+var_stan_dev = Standart_deviation("Entire input")
+ouput_jl=step(var_stan_dev,[2.0 -36.0 58.0;5.0 30.0 -86;50.0 -1.0 4.0])
 mat"const1=[2.0 -36.0 58.0;5.0 30.0 -86;50.0 -1.0 4.0]"
-mat"sim('C:\\Users\\523ur\\OneDrive\\Desktop\\engee-main\\New folder\\Standart_deviation_Entire_input')"
-ouput_std_ent_inp_mat=mat"output1'"
-test = ouput_std_ent_inp_jl - ouput_std_ent_inp_mat
-eps_val = 100000*eps()
+mat"sim('C:\\Users\\523ur\\OneDrive\\Desktop\\engee-main\\New folder\\Standart_Deviation_Entire_input')"
+ouput_mat=mat"output1'"
+test = ouput_jl - ouput_mat
+eps_val = 3*eps()
 if test<eps_val
     println("Тест Standart_deviation_Entire_input пройден")
+    
 else test>eps_val
     error("Тест Standart_deviation_Entire_input не пройден")
 end
 
 var_stan_dev = Standart_deviation("Specified dimension")
-ouput_std_spec_dem_jl=step(var_stan_dev,[2.0 -36.0 58.0;5.0 30.0 -86;50.0 -1.0 4.0],1)
+ouput_var_spec_dem_jl=step(var_stan_dev,[2.0 -36.0 58.0;5.0 30.0 -86;50.0 -1.0 4.0],1)
 mat"const1=[2.0 -36.0 58.0;5.0 30.0 -86;50.0 -1.0 4.0]"
-mat"sim('C:\\Users\\523ur\\OneDrive\\Desktop\\engee-main\\New folder\\Standart_deviation_Specified_dimension_1')"
-ouput_std_spec_dem_mat=mat"output1'"
-test = ouput_std_spec_dem_jl - ouput_std_spec_dem_mat
+mat"sim('C:\\Users\\523ur\\OneDrive\\Desktop\\engee-main\\New folder\\Standart_Deviation_Specified_dimension_1')"
+ouput_var_spec_dem_mat=mat"output1'"
+test = ouput_var_spec_dem_jl - ouput_var_spec_dem_mat
 eps_val = fill(3*eps(),size(test))
 if vec(test)<vec(eps_val)
     println("Тест Standart_deviation_Specified_dimension_1 пройден")
-else test>eps_val
+  
+else vec(test)>vec(eps_val)
     error("Тест Standart_deviation_Specified_dimension_1 не пройден")
 end

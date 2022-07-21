@@ -1,5 +1,5 @@
 using Statistics
-
+using  MATLAB
 mutable struct Moving_maximum
     moving_max::Array{Float64}
     window_lenght::Int 
@@ -40,12 +40,33 @@ function step(var_mov::Moving_maximum,x)
     end
 end
 
+var_mov=Moving_maximum("Sliding window",false)
+ouput_jl = [step(var_mov,[2]) step(var_mov,[3]) step(var_mov,[4]) step(var_mov,[5])]
+mat"input1=[2 3 4 5]"
+mat"sim('C:\\Users\\523ur\\OneDrive\\Desktop\\engee-main\\New folder\\Moving_Maximum_without_win_length')"
+ouput_mat=mat"output1'"
+test = ouput_jl-ouput_mat
+eps_val = fill(3*eps(),size(test))
+if vec(test)<vec(eps_val)
+    println("Тест Moving_Maximum_without_win_length пройден")
+    test_num = test_num + 1;
+else vec(test)>vec(eps_val)
+    error("Тест Moving_Maximum_without_win_length не пройден")
+end
+
 var_mov=Moving_maximum("Sliding window",4)
-step(var_mov,5)
-step(var_mov,-2)
-step(var_mov,5)
-step(var_mov,5)
-step(var_mov,5)
+ouput_jl = [step(var_mov,2) step(var_mov,3) step(var_mov,4) step(var_mov,5)]
+mat"input1=[2 3 4 5]"
+mat"sim('C:\\Users\\523ur\\OneDrive\\Desktop\\engee-main\\New folder\\Moving_Maximum_win_length')"
+ouput_mat=mat"output1'"
+test = ouput_jl-ouput_mat
+eps_val = fill(3*eps(),size(test))
+if vec(test)<vec(eps_val)
+    println("Тест Moving_Maximum_win_length пройден")
+    test_num = test_num + 1;
+else vec(test)>vec(eps_val)
+    error("Тест Moving_Maximum_win_length не пройден")
+end
 
 
 

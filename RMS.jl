@@ -30,6 +30,7 @@ test = ouput_rms_jl - ouput_rms_mat
 eps_val = fill(3*eps(),length(test))
 if test<eps_val
     println("Тест RMS_Each_column пройден")
+    test_num = test_num + 1;
 else test>eps_val
     error("Тест RMS_Each_column не пройден")
 end
@@ -43,6 +44,7 @@ test = ouput_std_each_row_jl - ouput_std_each_row_mat
 eps_val = fill(3*eps(),size(test))
 if vec(test)<vec(eps_val)
     println("Тест RMS_Each_row пройден")
+    test_num = test_num + 1;
 else vec(test)>vec(eps_val)
     error("Тест RMS_Each_row не пройден")
 end
@@ -56,6 +58,7 @@ test = ouput_std_each_row_jl - ouput_std_each_row_mat
 eps_val = 3*eps()
 if test<eps_val
     println("Тест RMS_Entire_input пройден")
+    test_num = test_num + 1;
 else test>eps_val
     error("Тест RMS_Entire_input не пройден")
 end
@@ -69,6 +72,7 @@ test = ouput_var_spec_dem_jl - ouput_var_spec_dem_mat
 eps_val = fill(3*eps(),size(test))
 if vec(test)<vec(eps_val)
     println("Тест RMS_Specified_dimension_1 пройден")
+    test_num = test_num + 1;
 else vec(test)>vec(eps_val)
     error("Тест RMS_Specified_dimension_1 не пройден")
 end

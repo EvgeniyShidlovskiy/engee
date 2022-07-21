@@ -1,3 +1,5 @@
+using MATLAB
+using Statistics
 mutable struct Detrend
     mode::String
     function Detrend(mode::String)
@@ -59,4 +61,17 @@ function step(var_det::Detrend,x)
   return y
 end
 
-step([-2 3 7 6 7 6 -7])
+
+var_det = Detrend("Detrend")
+ouput_jl=step(var_det,[-2 3 7 6 7 6 -7])
+mat"const1=[-2 3 7 6 7 6 -7]"
+mat"sim('C:\\Users\\523ur\\OneDrive\\Desktop\\engee-main\\New folder\\Detrend_func')"
+ouput_mat=mat"output1'"
+test = ouput_jl-vec(ouput_mat)
+eps_val = fill(3*eps(),size(test))
+if vec(test)<vec(eps_val)
+    println("Тест Detrend пройден")
+    test_num = test_num + 1;
+else vec(test)>vec(eps_val)
+    error("Тест Detrend не пройден")
+end

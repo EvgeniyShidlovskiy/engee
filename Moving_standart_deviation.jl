@@ -1,5 +1,5 @@
 using Statistics
-
+using  MATLAB
 mutable struct Moving_standart_deviation
     moving_std::Array{Float64} 
     window_lenght::Int 
@@ -156,14 +156,59 @@ if standart_deviation.method == "Exponential weighthing" && standart_deviation.s
 end
 
 
-
-
 moving_std=Moving_standart_deviation("Sliding window",false)
-step(moving_std,[2])
-step(moving_std,[3])
-step(moving_std,[4])
-step(moving_std,[5])
+ouput_jl = [step(moving_std,[2]) step(moving_std,[3]) step(moving_std,[4]) step(moving_std,[5])]
+mat"input1=[2 3 4 5]"
+mat"sim('C:\\Users\\523ur\\OneDrive\\Desktop\\engee-main\\New folder\\Moving_standart_deviation_without_win_length')"
+ouput_mat=mat"output1'"
+test = ouput_jl-ouput_mat
+eps_val = fill(3*eps(),size(test))
+if vec(test)<vec(eps_val)
+    println("Тест Moving_standart_deviation_without_win_length пройден")
+    test_num = test_num + 1;
+else vec(test)>vec(eps_val)
+    error("Тест Moving_standart_deviation_without_win_length не пройден")
+end
 
+moving_std=Moving_standart_deviation("Sliding window",4)
+ouput_jl = [step(moving_std,2) step(moving_std,3) step(moving_std,4) step(moving_std,5)]
+mat"input1=[2 3 4 5]"
+mat"sim('C:\\Users\\523ur\\OneDrive\\Desktop\\engee-main\\New folder\\Moving_standart_deviation_win_length')"
+ouput_mat=mat"output1'"
+test = ouput_jl-ouput_mat
+eps_val = fill(3*eps(),size(test))
+if vec(test)<vec(eps_val)
+    println("Тест Moving_standart_deviation_win_length пройден")
+    test_num = test_num + 1;
+else vec(test)>vec(eps_val)
+    error("Тест Moving_standart_deviation_win_length не пройден")
+end
 
+moving_std=Moving_standart_deviation("Exponential weighthing",true)
+ouput_jl = [step(moving_std,[2],0.9) step(moving_std,[3],0.9) step(moving_std,[4],0.9) step(moving_std,[5],0.9)]
+mat"input1=[2 3 4 5]"
+mat"forgetting_factor=0.9"
+mat"sim('C:\\Users\\523ur\\OneDrive\\Desktop\\engee-main\\New folder\\Moving_standart_deviation_Exponential_weighthing_forget_factor')"
+ouput_mat=mat"output1'"
+test  = ouput_jl - ouput_mat
+eps_val = fill(3*eps(),size(test))
+if vec(test)<vec(eps_val)
+    println("Тест Moving_standart_deviation_Exponential_weighthing_forget_factor пройден")
+    test_num = test_num + 1;
+else vec(test)>vec(eps_val)
+    error("Тест Moving_standart_deviation_Exponential_weighthing_forget_factor не пройден")
+end
 
-
+moving_std=Moving_standart_deviation("Exponential weighthing",0.9)
+ouput_jl = [step(moving_std,[2]) step(moving_std,[3]) step(moving_std,[4]) step(moving_std,[5])]
+mat"input1=[2 3 4 5]"
+mat"sim('C:\\Users\\523ur\\OneDrive\\Desktop\\engee-main\\New folder\\Moving_standart_deviation_Exponential_weighthing_09')"
+ouput_mat=mat"output1'"
+test  = ouput_jl - ouput_mat
+eps_val = fill(3*eps(),size(test))
+if vec(test)<vec(eps_val)
+    println("Тест Moving_standart_deviation_Exponential_weighthing_09 пройден")
+    test_num = test_num + 1;
+else vec(test)>vec(eps_val)
+    error("Тест Moving_standart_deviation_Exponential_weighthing_09 не пройден")
+end

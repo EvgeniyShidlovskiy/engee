@@ -1,4 +1,5 @@
 using Statistics
+using  MATLAB
 
 mutable struct Moving_variance
        moving_var::Array{Float64}
@@ -159,7 +160,7 @@ if var_var.method == "Exponential weighthing" && var_var.specify == true
 end
 
 moving_var=Moving_variance("Sliding window",false)
-ouput_jl = [step(moving_var,[1]) step(moving_var,[2]) step(moving_var,[3]) step(moving_var,[4])]
+ouput_jl = [step(moving_var,[2]) step(moving_var,[3]) step(moving_var,[4]) step(moving_var,[5])]
 mat"input1=[2 3 4 5]"
 mat"sim('C:\\Users\\523ur\\OneDrive\\Desktop\\engee-main\\New folder\\Moving_Variance_without_win_length')"
 ouput_mat=mat"output1'"
@@ -167,6 +168,7 @@ test = ouput_jl-ouput_mat
 eps_val = fill(3*eps(),size(test))
 if vec(test)<vec(eps_val)
     println("Тест Moving_Variance_without_win_length пройден")
+    test_num = test_num + 1;
 else vec(test)>vec(eps_val)
     error("Тест Moving_Variance_without_win_length не пройден")
 end
@@ -180,6 +182,7 @@ test = ouput_jl-ouput_mat
 eps_val = fill(3*eps(),size(test))
 if vec(test)<vec(eps_val)
     println("Тест Moving_Variance_win_length пройден")
+    test_num = test_num + 1;
 else vec(test)>vec(eps_val)
     error("Тест Moving_Variance_win_length не пройден")
 end
@@ -194,6 +197,7 @@ test  = ouput_jl - ouput_mat
 eps_val = fill(3*eps(),size(test))
 if vec(test)<vec(eps_val)
     println("Тест Moving_Variance_Exponential_weighthing_forget_factor пройден")
+    test_num = test_num + 1;
 else vec(test)>vec(eps_val)
     error("Тест Moving_Variance_Exponential_weighthing_forget_factor не пройден")
 end
@@ -207,6 +211,7 @@ test  = ouput_jl - ouput_mat
 eps_val = fill(3*eps(),size(test))
 if vec(test)<vec(eps_val)
     println("Тест Moving_Variance_Exponential_weighthing_09 пройден")
+    test_num = test_num + 1;
 else vec(test)>vec(eps_val)
     error("Тест Moving_Variance_Exponential_weighthing_09 не пройден")
 end

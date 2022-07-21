@@ -30,7 +30,7 @@ eps_val = fill(3*eps(),length(test))
 if test<eps_val
     println("Тест variance_Each_column пройден")
 else test>eps_val
-    println("Тест variance_Each_column не пройден")
+    error("Тест variance_Each_column не пройден")
 end
 
 var_var = Variance("Each row")
@@ -42,8 +42,9 @@ test = ouput_var_each_row_jl - ouput_var_each_row_mat
 eps_val = fill(3*eps(),size(test))
 if vec(test)<vec(eps_val)
     println("Тест variance_Each_row пройден")
+    test_num = test_num + 1;
 else test>eps_val
-    println("Тест variance_Each_row не пройден")
+    error("Тест variance_Each_row не пройден")
 end
 
 var_var = Variance("Entire input")
@@ -55,8 +56,9 @@ test = ouput_var_ent_inp_jl - ouput_var_ent_inp_mat
 eps_val = 100000*eps() 
 if test<eps_val
     println("Тест variance_Entire_input пройден")
+    test_num = test_num + 1;
 else test>eps_val
-    println("Тест variance_Entire_input не пройден")
+    error("Тест variance_Entire_input не пройден")
 end
 
 var_var = Variance("Specified dimension")
@@ -68,6 +70,7 @@ test = ouput_var_spec_dem_jl - ouput_var_spec_dem_mat
 eps_val = fill(3*eps(),size(test))
 if vec(test)<vec(eps_val)
     println("Тест variance_Specified_dimension_1 пройден")
+    test_num = test_num + 1;
 else test>eps_val
-    println("Тест variance_Specified_dimension_1 не пройден")
+    error("Тест variance_Specified_dimension_1 не пройден")
 end

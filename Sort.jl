@@ -54,6 +54,7 @@ test =  ouput_Sort_Value_dec_quick_jl - ouput_Sort_Value_dec_quick_mat
 eps_val = fill(3*eps(),size(test))
 if vec(test)<vec(eps_val)
     println("Тест Sort_Value_dec_quick пройден")
+    test_num = test_num + 1;
 else test>eps_val
     error("Тест Sort_Value_dec_quick не пройден")
 end
@@ -67,6 +68,7 @@ test =  ouput_Sort_Value_dec_ins_jl - ouput_Sort_Value_dec_ins_mat
 eps_val = fill(3*eps(),size(test))
 if vec(test)<vec(eps_val)
     println("Тест Sort_Value_dec_insert пройден")
+    test_num = test_num + 1;
 else test>eps_val
     error("Тест Sort_Value_dec_insert не пройден")
 end
@@ -82,6 +84,7 @@ test2 = ouput_Sort_Value_dec_ins_jl[2] - convert(Vector{Int64}, ouput2_Sort_Valu
 eps_val = fill(3*eps(),size(test))
 if test1<eps_val && test2<eps_val
     println("Тест Sort_Value_and_Index_dec_quick пройден")
+    test_num = test_num + 1;
 else test>eps_val
     error("Тест Sort_Value_and_Index_dec_quick не пройден")
 end
@@ -97,6 +100,7 @@ test2 = ouput_Sort_Value_dec_ins_jl[2] - convert(Vector{Int64}, ouput2_Sort_Valu
 eps_val = fill(3*eps(),size(test))
 if test1<eps_val && test2<eps_val
     println("Тест Sort_Value_and_Index_dec_insert пройден")
+    test_num = test_num + 1;
 else test>eps_val
     error("Тест Sort_Value_and_Index_dec_insert не пройден")
 end
@@ -112,6 +116,7 @@ test2 = ouput_Sort_Value_dec_ins_jl[2] - convert(Vector{Int64}, ouput2_Sort_Valu
 eps_val = fill(3*eps(),size(test))
 if test1<eps_val && test2<eps_val
     println("Тест Sort_Value_and_Index_acs_insert пройден")
+    test_num = test_num + 1;
 else test>eps_val
     error("Тест Sort_Value_and_Index_acs_insert не пройден")
 end
@@ -127,6 +132,7 @@ test2 = ouput_Sort_Value_dec_ins_jl[2] - convert(Vector{Int64}, ouput2_Sort_Valu
 eps_val = fill(3*eps(),size(test))
 if test1<eps_val && test2<eps_val
     println("Тест Sort_Value_and_Index пройден")
+    test_num = test_num + 1;
 else test>eps_val
     error("Тест Sort_Value_and_Index не пройден")
 end
@@ -140,6 +146,7 @@ test =  ouput_Sort_Value_dec_quick_jl - ouput_Sort_Value_dec_quick_mat
 eps_val = fill(3*eps(),size(test))
 if vec(test)<vec(eps_val)
     println("Тест Sort_Value_acs_insert пройден")
+    test_num = test_num + 1;
 else test>eps_val
     error("Тест Sort_Value_acs_insert не пройден")
 end
@@ -152,9 +159,10 @@ ouput_Sort_Value_dec_quick_mat=mat"output1'"
 test =  ouput_Sort_Value_dec_quick_jl - ouput_Sort_Value_dec_quick_mat
 eps_val = fill(3*eps(),size(test))
 if vec(test)<vec(eps_val)
-    println("Тест Sort_Value пройден")
+    println("Тест Sort_Value_asc_quick пройден")
+    test_num = test_num + 1;
 else test>eps_val
-    error("ТестSort_Value не пройден")
+    error("Тест Sort_Value_asc_quick не пройден")
 end
 
 var_sort = Sort("Index","Descending","Quick sort")
@@ -166,6 +174,49 @@ test =  ouput_Sort_Value_dec_quick_jl - ouput_Sort_Value_dec_quick_mat
 eps_val = fill(3*eps(),size(test))
 if vec(test)<vec(eps_val)
     println("Тест Sort_Index_dec_quick пройден")
+    test_num = test_num + 1;
 else test>eps_val
-    error("Sort_Index_dec_quick не пройден")
+    error("Тест Sort_Index_dec_quick не пройден")
+end
+
+var_sort = Sort("Index","Ascending","Insertion sort")
+ouput_Sort_Value_dec_quick_jl = step(var_sort,[8, 3, -1, 96])
+mat"const1=[8, 3, -1, 96]"
+mat"sim('C:\\Users\\523ur\\OneDrive\\Desktop\\engee-main\\New folder\\Sort_Index_acs_insert')"
+ouput_Sort_Value_dec_quick_mat=mat"output1'"
+test =  ouput_Sort_Value_dec_quick_jl - ouput_Sort_Value_dec_quick_mat
+eps_val = fill(3*eps(),size(test))
+if vec(test)<vec(eps_val)
+    println("Тест Sort_Index_acs_insert пройден")
+    test_num = test_num + 1;
+else test>eps_val
+    error("Тест Sort_Index_acs_insert не пройден")
+end
+
+var_sort = Sort("Index","Descending","Insertion sort")
+ouput_Sort_Value_dec_quick_jl = step(var_sort,[8, 3, -1, 96])
+mat"const1=[8, 3, -1, 96]"
+mat"sim('C:\\Users\\523ur\\OneDrive\\Desktop\\engee-main\\New folder\\Sort_Index_dec_insert')"
+ouput_Sort_Value_dec_quick_mat=mat"output1'"
+test =  ouput_Sort_Value_dec_quick_jl - ouput_Sort_Value_dec_quick_mat
+eps_val = fill(3*eps(),size(test))
+if vec(test)<vec(eps_val)
+    println("Тест Sort_Index_dec_insert пройден")
+    test_num = test_num + 1;
+else test>eps_val
+    error("Тест Sort_Index_dec_insert не пройден")
+end
+
+var_sort = Sort("Index","Ascending","Quick sort")
+ouput_Sort_Value_dec_quick_jl = step(var_sort,[8, 3, -1, 96])
+mat"const1=[8, 3, -1, 96]"
+mat"sim('C:\\Users\\523ur\\OneDrive\\Desktop\\engee-main\\New folder\\Sort_Index')"
+ouput_Sort_Value_dec_quick_mat=mat"output1'"
+test =  ouput_Sort_Value_dec_quick_jl - ouput_Sort_Value_dec_quick_mat
+eps_val = fill(3*eps(),size(test))
+if vec(test)<vec(eps_val)
+    println("Тест Sort_Index_asc_quick пройден")
+    test_num = test_num + 1;
+else test>eps_val
+    error("Тест Sort_Index_asc_quick не пройден")
 end
