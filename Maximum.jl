@@ -41,6 +41,118 @@ function step(var_maximum::Maximum,x::Array{Float64},i=1::Int64)
         return val
     end
 end
-var_maximum=Maximum("Value","Entire input")
-step(var_maximum,[2.0 -3.0 58.0;5.0 30.0 -80;50.0 -1.0 3.0])
 
+
+var_maximum=Maximum("Value","Specified dimension")
+ouput_jl =step(var_maximum
+,[2.0 -3.0 58.0 3.0],1)
+mat"const1=[2.0 -3.0 58.0 3.0]"
+mat"sim('C:\\Users\\523ur\\OneDrive\\Desktop\\engee-main\\New folder\\Maximum_Value_Specified_dimension_1')"
+ouput_mat=mat"output1'"
+test  = vec(ouput_jl) - ouput_mat
+eps_val = fill(3*eps(),size(test))
+if vec(test)<vec(eps_val)
+    println("Тест Maximum_Value_Specified_dimension_1 пройден")
+else vec(test)>vec(eps_val)
+    error("Тест Maximum_Value_Specified_dimension_1 не пройден")
+end
+
+var_maximum=Maximum("Value","Entire input")
+ouput_jl =step(var_maximum
+,[2.0 -3.0 58.0 3.0])
+mat"const1=[2.0 -3.0 58.0 3.0]"
+mat"sim('C:\\Users\\523ur\\OneDrive\\Desktop\\engee-main\\New folder\\Maximum_Value_Entire_input')"
+ouput_mat=mat"output1'"
+test  = ouput_jl - ouput_mat
+eps_val = 3*eps()
+if test<eps_val
+    println("Тест Maximum_Value_Entire_input пройден")
+else vec(test)>vec(eps_val)
+    error("Тест Maximum_Value_Entire_input не пройден")
+end
+
+var_maximum=Maximum("Value","Each row")
+ouput_jl = step(var_maximum
+,[2.0 -3.0 58.0 3.0])
+mat"const1=[2.0 -3.0 58.0 3.0]"
+mat"sim('C:\\Users\\523ur\\OneDrive\\Desktop\\engee-main\\New folder\\Maximum_Value_Each_row')"
+ouput_mat=mat"output1'"
+test  = ouput_jl[1] - ouput_mat
+eps_val = 3*eps()
+if test<eps_val
+    println("Тест Maximum_Value_Each_row пройден")
+else vec(test)>vec(eps_val)
+    error("Тест Maximum_Value_Each_row не пройден")
+end
+
+var_maximum=Maximum("Value","Each column")
+ouput_jl = step(var_maximum
+,[2.0 -3.0 58.0 3.0])
+mat"const1=[2.0 -3.0 58.0 3.0]"
+mat"sim('C:\\Users\\523ur\\OneDrive\\Desktop\\engee-main\\New folder\\Maximum_Value_Each_column')"
+ouput_mat=mat"output1'"
+test  = ouput_jl - ouput_mat
+eps_val = fill(3*eps(),size(test))
+if test<eps_val
+    println("Тест Maximum_Value_Each_column пройден")
+else vec(test)>vec(eps_val)
+    error("Тест Maximum_Value_Each_column не пройден")
+end
+## need to convert Cartesian Index
+#=var_maximum
+=Maximum("Index","Specified dimension")
+ouput_jl =step(var_maximum
+,[2.0 -3.0 58.0 3.0],1)
+mat"const1=[2.0 -3.0 58.0 3.0]"
+mat"sim('C:\\Users\\523ur\\OneDrive\\Desktop\\engee-main\\New folder\\Maximum_Index_Specified_dimension_1')"
+ouput_mat=mat"output1'"
+test  = vec(ouput_jl) - ouput_mat
+eps_val = fill(3*eps(),size(test))
+if vec(test)<vec(eps_val)
+    println("Тест Maximum_Index_Specified_dimension_1 пройден")
+else vec(test)>vec(eps_val)
+    error("Тест Maximum_Index_Specified_dimension_1 не пройден")
+end
+
+var_maximum
+=Maximum("Index","Entire input")
+ouput_jl =step(var_maximum
+,[2.0 -3.0 58.0 3.0])
+mat"const1=[2.0 -3.0 58.0 3.0]"
+mat"sim('C:\\Users\\523ur\\OneDrive\\Desktop\\engee-main\\New folder\\Maximum_Index_Entire_input')"
+ouput_mat=mat"output1'"
+test  = ouput_jl - ouput_mat
+eps_val = 3*eps()
+if test<eps_val
+    println("Тест Maximum_Index_Entire_input пройден")
+else vec(test)>vec(eps_val)
+    error("Тест Maximum_Index_Entire_input не пройден")
+end=#
+
+var_maximum=Maximum("Index","Each row")
+ouput_jl = step(var_maximum
+,[2.0 -3.0 58.0 3.0])
+mat"const1=[2.0 -3.0 58.0 3.0]"
+mat"sim('C:\\Users\\523ur\\OneDrive\\Desktop\\engee-main\\New folder\\Maximum_Index_Each_rows')"
+ouput_mat=mat"output1'"
+test  = ouput_jl[1] - ouput_mat
+eps_val = 3*eps()
+if test<eps_val
+    println("Тест Maximum_Index_Each_row пройден")
+else vec(test)>vec(eps_val)
+    error("Тест Maximum_Index_Each_row не пройден")
+end
+
+var_maximum=Maximum("Index","Each column")
+ouput_jl = step(var_maximum
+,[2.0 -3.0 58.0 3.0])
+mat"const1=[2.0 -3.0 58.0 3.0]"
+mat"sim('C:\\Users\\523ur\\OneDrive\\Desktop\\engee-main\\New folder\\Maximum_Index_Each_colum')"
+ouput_mat=mat"output1'"
+test  = ouput_jl - ouput_mat
+eps_val = fill(3*eps(),size(test))
+if test<eps_val
+    println("Тест Maximum_Index_Each_column пройден")
+else vec(test)>vec(eps_val)
+    error("Тест Maximum_Index_Each_column не пройден")
+end

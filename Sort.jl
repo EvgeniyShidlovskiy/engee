@@ -152,9 +152,9 @@ ouput_Sort_Value_dec_quick_mat=mat"output1'"
 test =  ouput_Sort_Value_dec_quick_jl - ouput_Sort_Value_dec_quick_mat
 eps_val = fill(3*eps(),size(test))
 if vec(test)<vec(eps_val)
-    println("Тест Sort_Value пройден")
+    println("Тест Sort_Value_asc_quick пройден")
 else test>eps_val
-    error("ТестSort_Value не пройден")
+    error("Тест Sort_Value_asc_quick не пройден")
 end
 
 var_sort = Sort("Index","Descending","Quick sort")
@@ -167,5 +167,44 @@ eps_val = fill(3*eps(),size(test))
 if vec(test)<vec(eps_val)
     println("Тест Sort_Index_dec_quick пройден")
 else test>eps_val
-    error("Sort_Index_dec_quick не пройден")
+    error("Тест Sort_Index_dec_quick не пройден")
+end
+
+var_sort = Sort("Index","Ascending","Insertion sort")
+ouput_Sort_Value_dec_quick_jl = step(var_sort,[8, 3, -1, 96])
+mat"const1=[8, 3, -1, 96]"
+mat"sim('C:\\Users\\523ur\\OneDrive\\Desktop\\engee-main\\New folder\\Sort_Index_acs_insert')"
+ouput_Sort_Value_dec_quick_mat=mat"output1'"
+test =  ouput_Sort_Value_dec_quick_jl - ouput_Sort_Value_dec_quick_mat
+eps_val = fill(3*eps(),size(test))
+if vec(test)<vec(eps_val)
+    println("Тест Sort_Index_acs_insert пройден")
+else test>eps_val
+    error("Тест Sort_Index_acs_insert не пройден")
+end
+
+var_sort = Sort("Index","Descending","Insertion sort")
+ouput_Sort_Value_dec_quick_jl = step(var_sort,[8, 3, -1, 96])
+mat"const1=[8, 3, -1, 96]"
+mat"sim('C:\\Users\\523ur\\OneDrive\\Desktop\\engee-main\\New folder\\Sort_Index_dec_insert')"
+ouput_Sort_Value_dec_quick_mat=mat"output1'"
+test =  ouput_Sort_Value_dec_quick_jl - ouput_Sort_Value_dec_quick_mat
+eps_val = fill(3*eps(),size(test))
+if vec(test)<vec(eps_val)
+    println("Тест Sort_Index_dec_insert пройден")
+else test>eps_val
+    error("Тест Sort_Index_dec_insert не пройден")
+end
+
+var_sort = Sort("Index","Ascending","Quick sort")
+ouput_Sort_Value_dec_quick_jl = step(var_sort,[8, 3, -1, 96])
+mat"const1=[8, 3, -1, 96]"
+mat"sim('C:\\Users\\523ur\\OneDrive\\Desktop\\engee-main\\New folder\\Sort_Index')"
+ouput_Sort_Value_dec_quick_mat=mat"output1'"
+test =  ouput_Sort_Value_dec_quick_jl - ouput_Sort_Value_dec_quick_mat
+eps_val = fill(3*eps(),size(test))
+if vec(test)<vec(eps_val)
+    println("Тест Sort_Index_asc_quick пройден")
+else test>eps_val
+    error("Тест Sort_Index_asc_quick не пройден")
 end

@@ -49,8 +49,8 @@ else test>eps_val
     error("Тест Standart_deviation_Each_row не пройден")
 end
 
-var_var = Standart_deviation("Entire input")
-ouput_std_ent_inp_jl=step(var_var,[2.0 -36.0 58.0;5.0 30.0 -86;50.0 -1.0 4.0])
+var_stan_dev = Standart_deviation("Entire input")
+ouput_std_ent_inp_jl=step(var_stan_dev,[2.0 -36.0 58.0;5.0 30.0 -86;50.0 -1.0 4.0])
 mat"const1=[2.0 -36.0 58.0;5.0 30.0 -86;50.0 -1.0 4.0]"
 mat"sim('C:\\Users\\523ur\\OneDrive\\Desktop\\engee-main\\New folder\\Standart_deviation_Entire_input')"
 ouput_std_ent_inp_mat=mat"output1'"

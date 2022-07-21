@@ -1,5 +1,5 @@
 using Statistics
-
+using  MATLAB
 mutable struct  Moving_rms
     mov_root_mean_squre::Array{Float64}
     window_lenght::Int 
@@ -70,7 +70,58 @@ function step(mrms::Moving_rms,x,lambda::Float64)
         end
     end
 
-mrms=Moving_rms("Sliding window",4)
-step(mrms,1)
 
+
+mrms=Moving_rms("Sliding window",false)
+ouput_jl = [step(mrms,[2]) step(mrms,[3]) step(mrms,[4]) step(mrms,[5])]
+mat"input1=[2 3 4 5]"
+mat"sim('C:\\Users\\523ur\\OneDrive\\Desktop\\engee-main\\New folder\\Moving_RMS_without_win_length')"
+ouput_mat=mat"output1'"
+test = ouput_jl-ouput_mat
+eps_val = fill(3*eps(),size(test))
+if vec(test)<vec(eps_val)
+    println("Тест Moving_RMS_without_win_length пройден")
+else vec(test)>vec(eps_val)
+    error("Тест Moving_RMS_without_win_length не пройден")
+end
+
+mrms=Moving_rms("Sliding window",4)
+ouput_jl = [step(mrms,2) step(mrms,3) step(mrms,4) step(mrms,5)]
+mat"input1=[2 3 4 5]"
+mat"sim('C:\\Users\\523ur\\OneDrive\\Desktop\\engee-main\\New folder\\Moving_RMS_win_length')"
+ouput_mat=mat"output1'"
+test = ouput_jl-ouput_mat
+eps_val = fill(3*eps(),size(test))
+if vec(test)<vec(eps_val)
+    println("Тест Moving_RMS_win_length пройден")
+else vec(test)>vec(eps_val)
+    error("Тест Moving_RMS_win_length не пройден")
+end
+
+mrms=Moving_rms("Exponential weighthing",true)
+ouput_jl = [step(mrms,[2],0.9) step(mrms,[3],0.9) step(mrms,[4],0.9) step(mrms,[5],0.9)]
+mat"input1=[2 3 4 5]"
+mat"forgetting_factor=0.9"
+mat"sim('C:\\Users\\523ur\\OneDrive\\Desktop\\engee-main\\New folder\\Moving_RMS_Exponential_weighthing_forget_factor')"
+ouput_mat=mat"output1'"
+test  = ouput_jl - ouput_mat
+eps_val = fill(3*eps(),size(test))
+if vec(test)<vec(eps_val)
+    println("Тест Moving_RMS_Exponential_weighthing_forget_factor пройден")
+else vec(test)>vec(eps_val)
+    error("Тест Moving_RMS_Exponential_weighthing_forget_factor не пройден")
+end
+
+mrms=Moving_rms("Exponential weighthing",0.9)
+ouput_jl = [step(mrms,[2]) step(mrms,[3]) step(mrms,[4]) step(mrms,[5])]
+mat"input1=[2 3 4 5]"
+mat"sim('C:\\Users\\523ur\\OneDrive\\Desktop\\engee-main\\New folder\\Moving_RMS_Exponential_weighthing_09')"
+ouput_mat=mat"output1'"
+test  = ouput_jl - ouput_mat
+eps_val = fill(3*eps(),size(test))
+if vec(test)<vec(eps_val)
+    println("Тест Moving_RMS_Exponential_weighthing_09 пройден")
+else vec(test)>vec(eps_val)
+    error("Тест Moving_RMS_Exponential_weighthing_09 не пройден")
+end
 
